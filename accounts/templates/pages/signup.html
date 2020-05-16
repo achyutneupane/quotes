@@ -1,0 +1,58 @@
+{% extends 'master/minmaster.html' %}
+{% block content %}
+{% load static %}
+
+<section class="ftco-section contact-section px-md-4">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-12 mb-4">
+                <h2 class="h3">Contact Information</h2>
+            </div>
+            <div class="w-100"></div>
+            <h2>Before SignUp</h2>
+            <ul>
+                <li> Username should be atleast of 5 character</li>
+                <li>Password shoud contain one uppercase and specific Symbol</li>
+            </ul>
+        </div>
+        <H1>Sign UP</H1>
+        <div class="row block-9">
+            <div class="col-lg-6 d-flex">
+                <form action="signup" class="bg-light p-5 contact-form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="firstname" placeholder="firstname">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="lastname" placeholder="lastname">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Sign Up" name="signup" class="btn btn-primary py-3 px-5">
+                    </div>
+                       <div> {%for message in messages %}
+                        <p style="color:red">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 d-flex">
+                <div class="bg-light">
+                    <img src="{% static 'assets/images/signup.jpeg' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

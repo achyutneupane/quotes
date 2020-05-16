@@ -1,0 +1,54 @@
+{% extends 'master/master.html' %}
+{% block content %}
+{% load static %}
+<div class="col-xl-8 py-5 px-md-5">
+    <div class="row pt-md-4">
+        {% for blog in total_posts_by_category %}
+        {% if blog.status %}
+        <br>
+        <div class="card" style="width: 38rem;">
+            <div class="card-body">
+                <h5 style="color:black; weight:strong;" class="card-title">
+                    {{blog.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{blog.main_menu}}</h6>
+                <p class="card-subtitle mb-2 text-muted">Posted by : {{blog.author}}</p>
+                <p style="color:black;" class="card-text" id="{{blog.title}}">{{blog.description}}</p>
+                <form method="POST" action="{%url 'like-quotes' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="blog_id" value="{{blog.id}}">
+                    {% if user not in blog.thumbup.all %}
+                    <button class="btn btn-primary">{{ blog.thumbup.all.count }} <i class="fa fa-thumbs-o-up"></i> Likes</button>
+                    {% else %}
+                    <button class="btn btn-primary">{{ blog.thumbup.all.count }} <i class="fa fa-thumbs-o-up"></i> Liked</button>
+                    {% endif %}
+                    <button onclick="copyElementText('{{blog.title}}')" class="btn btn-success"><i class="fa fa-heart"></i> Copy</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="blog-entry ftco-animate d-md-flex">
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div><!-- END-->
+    <div class="pagination">
+    <span class="step-links">
+        {% if total_posts_by_category.has_previous %}
+            <a href="?page=1">&lt; first</a>
+            <a href="?page={{ total_posts_by_category.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ total_posts_by_category.number }} of {{ total_posts_by_category.paginator.num_pages }}.
+        </span>
+
+        {% if total_posts_by_category.has_next %}
+            <a href="?page={{ total_posts_by_category.next_page_number }}">next</a>
+            <a href="?page={{ total_posts_by_category.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+
+{% endblock %}

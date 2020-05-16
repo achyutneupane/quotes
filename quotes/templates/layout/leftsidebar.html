@@ -1,0 +1,40 @@
+<a href="#" class="js-nachyut-nav-toggle nachyut-nav-toggle"><i></i></a>
+ <aside id="nachyut-aside" role="complementary" class="js-fullheight">
+        <nav id="nachyut-main-menu" role="navigation">
+
+            <ul>
+                <li class="nachyut-active"><a href="{% url 'home' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' user.username%}">Profile</a></li>
+                <li><a href="{% url 'createblog'%}">Write Quotes </a></li>
+                {% else %}
+                <li><a href="{% url 'signin' %}">Sign In </a></li>
+                <li><a href="{% url 'signup'%}">Write Quotes </a></li>
+                {%endif%}
+
+
+            </ul>
+        </nav>
+        <div class="nachyut-footer">
+            <h2>Nepali Status and Quotes</h2>
+            <div class="mb-4">
+                  {% if user.is_authenticated %}
+                <h3 style="color: blue">Welcome, {{user.first_name}}</h3>
+                {% endif %}
+            </div>
+            <p class="pfooter"><!-- Link back to nachyut can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                All rights reserved <i class="icon-heart" aria-hidden="true"></i><a
+                        href="https://nachyut.com.np" target="_blank">Achyut.an</a>
+                <a href="{% url 'about' %}">| About</a>
+                <a href="{% url 'contact' %}">| contact</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'signout' %}" style="color:red"> <span>| Logout</span></a>
+                {% else %}
+                <a href="{% url 'signin' %}" style="color:green"> <span>| Login</span></a>
+                {% endif %}
+                <!-- Link back to nachyut can't be removed. Template is licensed under CC BY 3.0. --></p>
+        </div>
+
+    </aside> <!-- END nachyut-ASIDE -->
+<div id="nachyut-main">

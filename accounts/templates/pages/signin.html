@@ -1,0 +1,43 @@
+{% extends 'master/minmaster.html' %}
+{% block content %}
+{% load static %}
+
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-12 mb-4">
+                <h2 class="h3">You are Going to Explore your Talent !!</h2>
+            </div>
+            <div class="w-100"></div>
+        </div>
+        <H1>Sign In</H1>
+        <div class="row block-9">
+            <div class="col-lg-6 d-flex">
+                <form class="bg-light p-5 contact-form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Sign In" name="signin" class="btn btn-primary py-3 px-5">
+                        <a href="{% url 'signup'%}"> Don't have account ?</a>
+                    </div>
+                </form>
+         <div> {%for message in messages %}
+                        <p style="color:red">{{message}}</p>
+                        {% endfor %}
+                    </div>
+            </div>
+
+            <div class="col-lg-6 d-flex">
+                <div class="bg-light">
+                    <img src="{% static 'assets/images/signin.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
